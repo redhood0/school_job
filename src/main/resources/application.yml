@@ -5,7 +5,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://rm-bp1np46rt3na0655zlo.mysql.rds.aliyuncs.com:3306/db_02?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    url: jdbc:mysql://rm-bp1np46rt3na0655zlo.mysql.rds.aliyuncs.com:3306/db_test?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
     username: wl
     password: 1QAZ!QAZ
     driver-class-name: com.mysql.jdbc.Driver
@@ -41,7 +41,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     jdbc-type-for-null: 'null'
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.team2.smartcampus.entity
+  type-aliases-package: com.hooli.work.entity
   global-config:
     db-config:
       #主键类型：auto主键自增，input用户输入id，id_worker全局唯一数字id，UUID全局唯一的UUID

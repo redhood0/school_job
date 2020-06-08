@@ -1,7 +1,7 @@
-package com.team2.smartcampus.handler;
+package com.hooli.work.handler;
 
 
-import com.team2.smartcampus.common.ResponseResult;
+import com.hooli.work.common.ResponseResult;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

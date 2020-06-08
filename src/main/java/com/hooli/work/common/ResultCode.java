@@ -1,4 +1,4 @@
-package com.team2.smartcampus.common;
+package com.hooli.work.common;
 
 
 import java.util.ArrayList;
