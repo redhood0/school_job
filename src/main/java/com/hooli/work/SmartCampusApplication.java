@@ -7,11 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 /**
- * @author 林小派
+ * @author 赵大派
  */
 @SpringBootApplication
 @EnableCaching
-@MapperScan("com.team2.smartcampus.mapper")
+@MapperScan("com.hooli.work.mapper")
 public class SmartCampusApplication {
 
     public static void main(String[] args) {

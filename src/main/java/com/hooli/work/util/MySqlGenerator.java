@@ -108,9 +108,9 @@ public class MySqlGenerator {
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setDriverName("com.mysql.jdbc.Driver")
-                .setUrl("jdbc:mysql://rm-bp1np46rt3na0655zlo.mysql.rds.aliyuncs.com:3306/db_test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
-                .setUsername("wl")
-                .setPassword("1QAZ!QAZ");
+                .setUrl("jdbc:mysql://47.101.179.127:3306/school_job?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
+                .setUsername("zq")
+                .setPassword("123456");
 
         AutoGenerator autoGenerator = new AutoGenerator();
         autoGenerator.setGlobalConfig(config)

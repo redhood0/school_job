@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hooli.work.mapper.WorkDemandContentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hooli.work.entity.WorkDemandContent">
+        <id column="id" property="id" />
+        <result column="demand_id" property="demandId" />
+        <result column="content" property="content" />
+        <result column="worktime" property="worktime" />
+        <result column="settlement" property="settlement" />
+        <result column="adv_maps_id" property="advMapsId" />
+        <result column="already_worker_num" property="alreadyWorkerNum" />
+        <result column="max_worker_num" property="maxWorkerNum" />
+        <result column="is_delete" property="isDelete" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, demand_id, content, worktime, settlement, adv_maps_id, already_worker_num, max_worker_num, is_delete, gmt_create, gmt_modified
+    </sql>
+
+</mapper>

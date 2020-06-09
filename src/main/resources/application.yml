@@ -2,7 +2,7 @@ server:
   port: 8081
 #  address:  192.168.43.84
   ssl:
-    key-store: src\main\resources\cky666-tomcat.jks
+    key-store: src/main/resources/cky666-tomcat.jks
     key-password: 123456
     #    key-alias:
     key-store-type: JKS
@@ -11,9 +11,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://rm-bp1np46rt3na0655zlo.mysql.rds.aliyuncs.com:3306/db_02?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
-    username: sb
-    password: 1QAZ!QAZ
+    url: jdbc:mysql://47.101.179.127:3306/school_job?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    username: zq
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
