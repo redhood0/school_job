@@ -12,7 +12,7 @@ spring:
     time-zone: GMT+8
   datasource:
     url: jdbc:mysql://rm-bp1np46rt3na0655zlo.mysql.rds.aliyuncs.com:3306/db_02?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
-    username: wl
+    username: sb
     password: 1QAZ!QAZ
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
