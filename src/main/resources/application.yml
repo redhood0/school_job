@@ -1,5 +1,11 @@
 server:
-  port: 8080
+  port: 8081
+#  address:  192.168.43.84
+  ssl:
+    key-store: src\main\resources\cky666-tomcat.jks
+    key-password: 123456
+    #    key-alias:
+    key-store-type: JKS
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
