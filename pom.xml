@@ -8,10 +8,10 @@
         <version>2.3.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.team2</groupId>
-    <artifactId>smart-campus</artifactId>
+    <groupId>com.hooli</groupId>
+    <artifactId>work</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>smart-campus</name>
+    <name>schooljob</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

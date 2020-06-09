@@ -1,4 +1,4 @@
-package com.team2.smartcampus;
+package com.hooli.work;
 
 import org.mybatis.spring.annotation.MapperScan;
 

@@ -1,10 +1,10 @@
-package com.team2.smartcampus.handler;
+package com.hooli.work.handler;
 
 
-import com.team2.smartcampus.common.ResponseResult;
-import com.team2.smartcampus.common.ResultCode;
-import com.team2.smartcampus.execption.BuildingException;
-import com.team2.smartcampus.execption.ServiceException;
+import com.hooli.work.common.ResponseResult;
+import com.hooli.work.common.ResultCode;
+import com.hooli.work.execption.BuildingException;
+import com.hooli.work.execption.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.team2.smartcampus.execption;
+package com.hooli.work.execption;
 
 /**
  * @PackgeName: com.team2.smartcampus.execption

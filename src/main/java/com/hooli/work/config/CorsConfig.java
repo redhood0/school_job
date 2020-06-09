@@ -1,4 +1,4 @@
-package com.team2.smartcampus.config;
+package com.hooli.work.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
