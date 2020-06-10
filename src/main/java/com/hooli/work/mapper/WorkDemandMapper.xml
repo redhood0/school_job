@@ -4,23 +4,35 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.hooli.work.entity.WorkDemand">
-        <id column="id" property="id" />
-        <result column="boss_id" property="bossId" />
-        <result column="cover_url" property="coverUrl" />
-        <result column="title" property="title" />
-        <result column="price" property="price" />
-        <result column="unit" property="unit" />
-        <result column="place" property="place" />
-        <result column="type" property="type" />
-        <result column="state" property="state" />
-        <result column="is_delete" property="isDelete" />
-        <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modified" property="gmtModified" />
+        <id column="id" property="id"/>
+        <result column="boss_id" property="bossId"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="title" property="title"/>
+        <result column="price" property="price"/>
+        <result column="unit" property="unit"/>
+        <result column="place" property="place"/>
+        <result column="type" property="type"/>
+        <result column="state" property="state"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <resultMap id="WorkDemandDto" type="com.hooli.work.entity.dto.WorkDemandDto">
+        <id column="id" property="id"/>
+
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, boss_id, cover_url, title, price, unit, place, type, state, is_delete, gmt_create, gmt_modified
     </sql>
+    <select id="selectDemandDtoByPage" resultType="com.hooli.work.entity.dto.WorkDemandDto">
+        SELECT *
+        FROM work_demand wd
+        where wd.is_delete = 0
+    </select>
+
+
 
 </mapper>

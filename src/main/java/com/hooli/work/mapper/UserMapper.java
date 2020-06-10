@@ -1,7 +1,8 @@
 package com.hooli.work.mapper;
 
-import com.hooli.work.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hooli.work.entity.User;
+import com.hooli.work.entity.dto.UserDto;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    UserDto selectUserByUserId(Long userId);
 }

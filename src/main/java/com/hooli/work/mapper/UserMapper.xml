@@ -24,5 +24,9 @@
     <sql id="Base_Column_List">
         id, username, nickname, avatar, password, gender, age, school, say_something, location, remark, is_delete, gmt_create, gmt_modified
     </sql>
+    <select id="selectUserByUserId" resultType="com.hooli.work.entity.dto.UserDto">
+        select * from user where user.id = #{userId}
+    </select>
+
 
 </mapper>

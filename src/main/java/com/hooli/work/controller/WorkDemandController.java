@@ -1,20 +1,76 @@
 package com.hooli.work.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.hooli.work.common.ResponseResult;
+import com.hooli.work.common.ResultCode;
+import com.hooli.work.entity.PageInfo;
+import com.hooli.work.entity.WorkDemand;
+import com.hooli.work.service.WorkDemandService;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * <p>
  *  前端控制器
  * </p>
  *
- * @author yy
+ * @author cky
  * @since 2020-06-09
  */
 @RestController
-@RequestMapping("/workDemand")
+@RequestMapping("/api/workdemand")
 public class WorkDemandController {
+    @Resource
+    WorkDemandService workDemandService;
 
+
+    @PostMapping("/search")
+    public ResponseResult selectWorkDemandByPage(@RequestBody PageInfo pageInfo){
+        if (pageInfo.getPage()==null || pageInfo.getSize() == null){
+            return ResponseResult.failure(ResultCode.PARAMS_ERROR);
+        }
+        return ResponseResult.success(workDemandService.selectDemandDtoByPage(pageInfo.getPage(),pageInfo.getSize()));
+    }
+
+    @PostMapping("/add")
+    public ResponseResult addWorkDemand(@RequestBody WorkDemand workDemand){
+        if (workDemand.getBossId()==null){
+            return ResponseResult.failure(ResultCode.PARAMS_ERROR);
+        }
+        int insert = workDemandService.insert(workDemand);
+        if (insert <1 ){
+            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+        }
+        return ResponseResult.success(workDemand);
+    }
+
+    @PostMapping("/delete")
+    public ResponseResult deleteWorkDemand(@RequestBody Map<String,Long> params){
+        if (params.get("id") == null){
+            return ResponseResult.failure(ResultCode.PARAMS_ERROR);
+        }
+        Long id = params.get("id");
+        WorkDemand workDemand = workDemandService.getById(id);
+        workDemand.setIsDelete(1);
+        int update = workDemandService.update(workDemand);
+        if (update <1 ){
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+        return ResponseResult.success(id);
+    }
+
+    @PostMapping("/update")
+    public ResponseResult updateWorkDemand(@RequestBody WorkDemand workDemand){
+        Integer isDelete = workDemandService.getById(workDemand.getId()).getIsDelete();
+        if (isDelete == 1){
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+        int update = workDemandService.update(workDemand);
+        if (update<1){
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+        return ResponseResult.success("更新成功");
+    }
 }
