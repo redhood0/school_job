@@ -30,9 +30,11 @@
     <select id="selectDemandDtoByPage" resultType="com.hooli.work.entity.dto.WorkDemandDto">
         SELECT *
         FROM work_demand wd
-        where wd.is_delete = 0
+        WHERE wd.is_delete = 0
     </select>
-
+    <select id="selectDemandDtoByUserId" resultType="com.hooli.work.entity.dto.WorkDemandDto">
+        SELECT * FROM work_demand wd WHERE wd.boss_id = #{userId} AND wd.is_delete = 0
+    </select>
 
 
 </mapper>

@@ -9,7 +9,7 @@ import com.hooli.work.entity.dto.UserDto;
  *  Mapper 接口
  * </p>
  *
- * @author yy
+ * @author cky
  * @since 2020-06-09
  */
 public interface UserMapper extends BaseMapper<User> {

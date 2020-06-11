@@ -18,9 +18,6 @@ import java.io.File;
 /**
  * @ClassName MySqlGenerator
  * @Description 代码生成器
- * @Author mq_xu
- * @Date 2020/4/16
- * @Version 1.0
  */
 @Slf4j
 public class MySqlGenerator {
@@ -32,7 +29,7 @@ public class MySqlGenerator {
 
         config.setActiveRecord(true)
                 //作者注释
-                .setAuthor("yy")
+                .setAuthor("dylan")
                 //代码生成输出路径
                 .setOutputDir(projectPath + "/src/main/java")
                 //覆盖已有文件，默认false

@@ -10,11 +10,12 @@ import com.hooli.work.entity.dto.WorkDemandDto;
  *  Mapper 接口
  * </p>
  *
- * @author yy
+ * @author cky
  * @since 2020-06-09
  */
 public interface WorkDemandMapper extends BaseMapper<WorkDemand> {
 
     IPage<WorkDemandDto> selectDemandDtoByPage(IPage<?> iPage);
 
+    IPage<WorkDemandDto> selectDemandDtoByUserId(IPage<?> iPage,int userId);
 }
