@@ -11,7 +11,7 @@
         <result column="price" property="price"/>
         <result column="unit" property="unit"/>
         <result column="place" property="place"/>
-        <result column="type" property="type"/>
+        <result column="type_id" property="typeId"/>
         <result column="state" property="state"/>
         <result column="is_delete" property="isDelete"/>
         <result column="gmt_create" property="gmtCreate"/>
@@ -20,21 +20,41 @@
 
     <resultMap id="WorkDemandDto" type="com.hooli.work.entity.dto.WorkDemandDto">
         <id column="id" property="id"/>
-
+        <result column="boss_id" property="bossId"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="title" property="title"/>
+        <result column="price" property="price"/>
+        <result column="unit" property="unit"/>
+        <result column="place" property="place"/>
+        <result column="name" property="typeName"/>
+        <result column="state" property="state"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, boss_id, cover_url, title, price, unit, place, type, state, is_delete, gmt_create, gmt_modified
+        id, boss_id, cover_url, title, price, unit, place, type_id, state, is_delete, gmt_create, gmt_modified
     </sql>
-    <select id="selectDemandDtoByPage" resultType="com.hooli.work.entity.dto.WorkDemandDto">
-        SELECT *
+
+    <select id="selectDemandDtoByPage" resultMap="WorkDemandDto">
+        SELECT wd.id,wd.boss_id,wd.cover_url,wd.title,wd.price,wd.unit,wd.place,wt.name,wd.state,wd.is_delete,wd.gmt_create,wd.gmt_modified
         FROM work_demand wd
+        LEFT JOIN work_type wt
+        on wd.type_id = wt.id
         WHERE wd.is_delete = 0
     </select>
-    <select id="selectDemandDtoByUserId" resultType="com.hooli.work.entity.dto.WorkDemandDto">
-        SELECT * FROM work_demand wd WHERE wd.boss_id = #{userId} AND wd.is_delete = 0
+
+    <select id="selectDemandDtoByUserId" resultMap="WorkDemandDto">
+        SELECT wd.id,wd.boss_id,wd.cover_url,wd.title,wd.price,wd.unit,wd.place,wt.name,wd.state,wd.is_delete,wd.gmt_create,wd.gmt_modified
+        FROM work_demand wd
+        LEFT JOIN work_type wt
+        on wd.type_id = wt.id
+        WHERE wd.boss_id = #{userId}
+        AND wd.is_delete = 0
     </select>
+
 
 
 </mapper>

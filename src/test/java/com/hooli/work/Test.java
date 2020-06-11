@@ -1,5 +1,8 @@
 package com.hooli.work;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hooli.work.entity.dto.WorkDemandDto;
 import com.hooli.work.mapper.UserMapper;
 import com.hooli.work.mapper.WorkDemandMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +24,9 @@ public class Test {
     UserMapper userMapper;
     @org.junit.jupiter.api.Test
     public void test(){
-
-        log.error("user:{}",userMapper.selectUserByUserId(Long.valueOf(1)));
-//        System.out.println(mapper.selectDemandDtoByPage(workDemandDtoIPage).getRecords());
+        IPage<WorkDemandDto> workDemandDtoIPage = new Page<>(0, 10);
+//        log.error("user:{}",mapper.selectDemandDtoByPage(workDemandDtoIPage));
+        System.out.println(mapper.selectDemandDtoByPage(workDemandDtoIPage).getRecords());
     }
 
 

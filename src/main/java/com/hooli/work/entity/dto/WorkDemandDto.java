@@ -3,6 +3,7 @@ package com.hooli.work.entity.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class WorkDemandDto {
     private Long id;
     private Long bossId;
@@ -23,7 +25,7 @@ public class WorkDemandDto {
     private BigDecimal price;
     private String unit;
     private String place;
-    private String type;
+    private String typeName;
     private Integer state;
     private Integer isDelete;
     private LocalDateTime gmtCreate;

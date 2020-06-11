@@ -72,7 +72,7 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
                     .price(workDemand.getPrice())
                     .unit(workDemand.getUnit())
                     .place(workDemand.getPlace())
-                    .type(workDemand.getType())
+                    .typeName((workDemand.getTypeName()==null)?"无":workDemand.getTypeName())
                     .state(workDemand.getState())
                     .gmtModified(workDemand.getGmtModified()).build());
         }

@@ -27,7 +27,7 @@ public class WorkDemandVo {
     private BigDecimal price;
     private String unit;
     private String place;
-    private String type;
+    private String typeName;
     private Integer state;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
     private LocalDateTime gmtModified;
