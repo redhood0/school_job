@@ -16,5 +16,17 @@
     <sql id="Base_Column_List">
         id, tagname, father_id, is_delete, gmt_create, gmt_modified
     </sql>
+    <select id="findAllTagNameByDemandId" resultType="com.hooli.work.entity.dto.WorkTagDto">
+        SELECT wd.id,res.tagname FROM
+        (SELECT td.demand_id,wt.tagname FROM tag_demand td
+        INNER JOIN work_tag wt
+        where td.tag_id = wt.id) res
+        INNER JOIN work_demand wd
+        WHERE res.demand_id = wd.id AND wd.id = #{demandId}
+    </select>
+    <select id="selectWorkTagByPage" resultType="com.hooli.work.entity.dto.WorkTagDto">
+        select wt.id,wt.tagname
+        from work_tag wt order by id asc
+    </select>
 
 </mapper>

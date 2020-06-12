@@ -26,6 +26,7 @@
         <result column="price" property="price"/>
         <result column="unit" property="unit"/>
         <result column="place" property="place"/>
+        <result column="place_name" property="placeName"/>
         <result column="name" property="typeName"/>
         <result column="state" property="state"/>
         <result column="is_delete" property="isDelete"/>
@@ -39,7 +40,7 @@
     </sql>
 
     <select id="selectDemandDtoByPage" resultMap="WorkDemandDto">
-        SELECT wd.id,wd.boss_id,wd.cover_url,wd.title,wd.price,wd.unit,wd.place,wt.name,wd.state,wd.is_delete,wd.gmt_create,wd.gmt_modified
+        SELECT wd.id,wd.boss_id,wd.cover_url,wd.title,wd.price,wd.unit,wd.place,wd.place_name,wt.name,wd.state,wd.is_delete,wd.gmt_create,wd.gmt_modified
         FROM work_demand wd
         LEFT JOIN work_type wt
         on wd.type_id = wt.id
@@ -47,7 +48,7 @@
     </select>
 
     <select id="selectDemandDtoByUserId" resultMap="WorkDemandDto">
-        SELECT wd.id,wd.boss_id,wd.cover_url,wd.title,wd.price,wd.unit,wd.place,wt.name,wd.state,wd.is_delete,wd.gmt_create,wd.gmt_modified
+        SELECT wd.id,wd.boss_id,wd.cover_url,wd.title,wd.price,wd.unit,wd.place,wd.place_name,wt.name,wd.state,wd.is_delete,wd.gmt_create,wd.gmt_modified
         FROM work_demand wd
         LEFT JOIN work_type wt
         on wd.type_id = wt.id

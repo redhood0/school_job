@@ -6,15 +6,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hooli.work.entity.WorkDemand;
 import com.hooli.work.entity.dto.UserDto;
 import com.hooli.work.entity.dto.WorkDemandDto;
+import com.hooli.work.entity.dto.WorkTagDto;
 import com.hooli.work.entity.vo.WorkDemandVo;
 import com.hooli.work.mapper.UserMapper;
 import com.hooli.work.mapper.WorkDemandMapper;
+import com.hooli.work.mapper.WorkTagMapper;
 import com.hooli.work.service.WorkDemandService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
     private WorkDemandMapper workDemandMapper;
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private WorkTagMapper workTagMapper;
 
     @Override
     public List<WorkDemandVo> selectDemandDtoByPage(int page, int size) {
@@ -46,7 +49,6 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
 
     @Override
     public int update(WorkDemand workDemand) {
-        workDemand.setGmtModified(LocalDateTime.now());
         return workDemandMapper.updateById(workDemand);
     }
 
@@ -60,6 +62,7 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
 
     @Override
     public List<WorkDemandVo> transDtoToVo(List<WorkDemandDto> dto) {
+
         List<WorkDemandVo> workDemandVos = new ArrayList<>();
         for (WorkDemandDto workDemand : dto) {
             UserDto userDto = userMapper.selectUserByUserId(workDemand.getBossId());
@@ -72,10 +75,20 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
                     .price(workDemand.getPrice())
                     .unit(workDemand.getUnit())
                     .place(workDemand.getPlace())
+                    .placeName(workDemand.getPlaceName())
                     .typeName((workDemand.getTypeName()==null)?"无":workDemand.getTypeName())
-                    .state(workDemand.getState())
+                    .state((workDemand.getState()==0)?"招人中":"停止招聘")
+                    .tagName(getTagNames(workDemand.getId()))
                     .gmtModified(workDemand.getGmtModified()).build());
         }
         return workDemandVos;
+    }
+
+    private List<String> getTagNames(Long id){
+        List<String> tagNames = new ArrayList<>();
+        for(WorkTagDto workTagDto : workTagMapper.findAllTagNameByDemandId(id)){
+            tagNames.add(workTagDto.getTagname());
+        }
+        return tagNames;
     }
 }
