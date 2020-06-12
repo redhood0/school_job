@@ -4,16 +4,24 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.time.LocalDateTime;
+
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author dylan
@@ -23,7 +31,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("user")
-public class User extends Model<User> {
+public class User extends Model<User>  {
 
     private static final long serialVersionUID = 1L;
 
@@ -94,9 +102,12 @@ public class User extends Model<User> {
     private LocalDateTime gmtModified;
 
 
+
     @Override
     protected Serializable pkVal() {
         return this.id;
     }
+
+
 
 }
