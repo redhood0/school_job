@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-// 在我们真实的分发中，或者你们在公司，一般都可以看到一个公司自己封装RedisUtil
 @Component
 public final class RedisUtil {
 
