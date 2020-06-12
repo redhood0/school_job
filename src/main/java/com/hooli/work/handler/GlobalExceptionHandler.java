@@ -130,4 +130,6 @@ public class GlobalExceptionHandler {
     public ResponseResult sendError(ServiceException exception) {
         return ResponseResult.failure(ResultCode.SYSTEM_INNER_ERROR, exception.getMessage());
     }
+
+
 }

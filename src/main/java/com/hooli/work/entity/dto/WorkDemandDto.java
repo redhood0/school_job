@@ -25,6 +25,7 @@ public class WorkDemandDto {
     private BigDecimal price;
     private String unit;
     private String place;
+    private String placeName;
     private String typeName;
     private Integer state;
     private Integer isDelete;

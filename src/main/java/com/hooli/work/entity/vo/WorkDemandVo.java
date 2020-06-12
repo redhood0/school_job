@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @Author: cky
@@ -27,8 +28,10 @@ public class WorkDemandVo {
     private BigDecimal price;
     private String unit;
     private String place;
+    private String placeName;
     private String typeName;
-    private Integer state;
+    private String state;
+    private List<String> tagName;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
     private LocalDateTime gmtModified;
 }

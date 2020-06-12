@@ -61,7 +61,7 @@ public class MySqlGenerator {
                 .setNaming(NamingStrategy.underline_to_camel)
                 //生成表，可以写多个,如果不加参数，默认为所有表
 
-//                .setInclude("class")
+                .setInclude("work_demand")
                 .setEntityBuilderModel(true)
                 .setEntityLombokModel(true)
                 .setRestControllerStyle(true)

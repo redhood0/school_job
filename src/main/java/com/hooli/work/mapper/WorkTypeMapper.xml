@@ -16,4 +16,5 @@
         id, name, is_delete, gmt_create, gmt_modified
     </sql>
 
+
 </mapper>

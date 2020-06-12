@@ -1,9 +1,6 @@
 package com.hooli.work.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +16,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author dylan
- * @since 2020-06-11
+ * @since 2020-06-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -57,6 +54,12 @@ public class WorkDemand extends Model<WorkDemand> {
     private BigDecimal price;
 
     /**
+     * 工作地点
+     */
+    @TableField("place_name")
+    private String placeName;
+
+    /**
      * 单位（每天或每小时）
      */
     @TableField("unit")
@@ -80,13 +83,13 @@ public class WorkDemand extends Model<WorkDemand> {
     @TableField("state")
     private Integer state;
 
-    @TableField("is_delete")
+    @TableField(value = "is_delete",fill = FieldFill.INSERT)
     private Integer isDelete;
 
-    @TableField("gmt_create")
+    @TableField(value = "gmt_create",fill = FieldFill.INSERT)
     private LocalDateTime gmtCreate;
 
-    @TableField("gmt_modified")
+    @TableField(value = "gmt_modified",fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime gmtModified;
 
 
