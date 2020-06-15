@@ -34,4 +34,5 @@ public class WorkDemandVo {
     private List<String> tagName;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
     private LocalDateTime gmtModified;
+    private String toThisDay;
 }

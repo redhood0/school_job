@@ -160,6 +160,14 @@
 <!--            <artifactId>shiro-spring</artifactId>-->
 <!--            <version>1.5.3</version>-->
 <!--        </dependency>-->
+
+        <!--          时间格式化               -->
+        <dependency>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime</artifactId>
+            <version>4.0.5.Final</version>
+        </dependency>
+
     </dependencies>
 
     <build>
