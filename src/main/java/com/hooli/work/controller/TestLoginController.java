@@ -18,6 +18,8 @@ import javax.annotation.Resource;
  * @Version:
  * @Description:
  */
+
+//todo:delete
 @RestController
 @RequestMapping("/logins")
 public class TestLoginController {
