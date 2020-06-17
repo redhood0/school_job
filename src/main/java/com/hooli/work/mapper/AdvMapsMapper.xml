@@ -17,5 +17,8 @@
     <sql id="Base_Column_List">
         id, adv_map1, adv_map2, adv_map3, is_delete, gmt_create, gmt_modified
     </sql>
+    <select id="selectAdvMapsById" resultType="com.hooli.work.entity.AdvMaps">
+        select * from adv_maps
+    </select>
 
 </mapper>

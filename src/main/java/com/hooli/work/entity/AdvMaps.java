@@ -26,7 +26,7 @@ public class AdvMaps extends Model<AdvMaps> {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     @TableField("adv_map1")
     private String advMap1;
