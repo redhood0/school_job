@@ -2,11 +2,30 @@ server:
   port: 8081
 #  address:  10.40.245.251
   ssl:
-    key-store: src/main/resources/cky666-tomcat.jks
-    key-password: 123456
+    key-store: classpath:4071328_cky666.top.pfx
+#    key-password: n5wB62w3
     #    key-alias:
-    key-store-type: JKS
+    key-store-type: PKCS12
+    key-store-password: n5wB62w3
+  #    enabled-protocols: HTTP/1.1
+#    enabled: true
+#    scheme: https
+  tomcat:
+    uri-encoding: UTF-8
+    accesslog:
+      encoding: UTF-8
+  servlet:
+    session:
+      cookie:
+        max-age: 1800
+      timeout: 1800
 spring:
+  session:
+    timeout: 1800
+    store-type: redis
+    redis:
+      namespace: securtity_session
+      flush-mode: on_save
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -23,7 +42,6 @@ spring:
       idle-timeout: 10000
       max-lifetime: 60000
       connection-timeout: 1000
-
   redis:
     database: 0
     host: 47.101.179.127
@@ -38,9 +56,13 @@ spring:
         # 连接池中的最大空闲连接
         max-idle: 10
         min-idle: 0
-    timeout: 1000
+#    timeout: 1000
 
-
+# 日志配置
+logging:
+  level:
+#    com.ruoyi: debug
+    org.springframework: warn
 # mybatis-Plus配置
 mybatis-plus:
   configuration:
