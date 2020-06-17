@@ -55,7 +55,20 @@
         WHERE wd.boss_id = #{userId}
         AND wd.is_delete = 0
     </select>
-
+    <select id="selectDemandDtoByWorkTag" resultType="com.hooli.work.entity.dto.WorkDemandDto">
+        SELECT res.id,res.boss_id,res.cover_url,res.title,res.price,res.unit,res.place,res.place_name,wtt.name,res.state,res.is_delete,res.gmt_create,res.gmt_modified
+		FROM (SELECT wd.id,wd.boss_id,wd.cover_url,wd.title,wd.price,wd.unit,wd.place,wd.place_name,wd.state,wd.is_delete,wd.gmt_create,wd.gmt_modified,td.tag_id,wd.type_id
+		FROM tag_demand td
+        INNER JOIN work_demand wd
+        WHERE td.demand_id = wd.id) res
+        LEFT JOIN work_type wtt
+        on res.type_id = wtt.id
+		INNER JOIN work_tag wt
+		WHERE res.tag_id = wt.id
+		AND wt.id = #{workTagId}
+		AND res.is_delete = 0
+		ORDER BY res.gmt_modified DESC
+    </select>
 
 
 </mapper>

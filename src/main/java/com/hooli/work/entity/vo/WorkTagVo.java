@@ -13,6 +13,6 @@ import lombok.*;
 @ToString
 @Builder
 public class WorkTagVo {
-    private Long id;
-    private String tagname;
+    private Long tagId;
+    private String tagName;
 }

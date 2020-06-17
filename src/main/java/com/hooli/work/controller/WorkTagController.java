@@ -4,11 +4,16 @@ package com.hooli.work.controller;
 import com.hooli.work.common.ResponseResult;
 import com.hooli.work.common.ResultCode;
 import com.hooli.work.entity.PageInfo;
+import com.hooli.work.entity.vo.RemoveUserFavouriteWorkTag;
+import com.hooli.work.entity.vo.UserFavouriteWorkTag;
 import com.hooli.work.service.WorkTagService;
-import com.hooli.work.util.RedisUtil;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,8 +29,6 @@ import java.util.Map;
 public class WorkTagController {
     @Resource
     WorkTagService workTagService;
-    @Resource
-    private RedisUtil redisUtil;
 
     @PostMapping("/search")
     public ResponseResult selectWorkTagByPage(@RequestBody PageInfo pageInfo) {
@@ -37,30 +40,45 @@ public class WorkTagController {
 
     @PostMapping("/favourite/set")
     public ResponseResult setFavouriteTag(@RequestBody Map<String, Object> params) {
-        if (params.get("id")==null || params.get("tag")==null){
+        if (params.get("id") == null || params.get("tagId") == null || params.get("tagName") == null) {
             return ResponseResult.failure(ResultCode.PARAMS_ERROR);
         }
-        if (redisUtil.sHasKey(params.get("id")+"favouriteTag", params.get("tag"))) {
-            return ResponseResult.failure(ResultCode.DATA_ALREADY_EXISTED);
+        ResponseResult responseResult = workTagService.setFavouriteTag((int) params.get("id"), (int) params.get("tagId"), (String) params.get("tagName"));
+        return responseResult;
+    }
+
+    @PostMapping("/favourite/setmany")
+    public ResponseResult setManyFavouriteTag(@RequestBody UserFavouriteWorkTag workTag) {
+        if (workTag.getWorkTagVo() == null) {
+            return ResponseResult.failure(ResultCode.PARAMS_ERROR);
         }
-        redisUtil.sSet(params.get("id")+"favouriteTag", params.get("tag"));
-        return ResponseResult.success("添加" + params.get("tag") + "成功");
+        ResponseResult responseResult = workTagService.setManyFavouriteTag( workTag.getId(), workTag.getWorkTagVo());
+        return responseResult;
     }
 
     @PostMapping("/favourite/get")
     public ResponseResult getFavouriteTag(@RequestBody Map<String, String> params) {
-        if (params.get("id")==null ){
+        if (params.get("id") == null) {
             return ResponseResult.failure(ResultCode.PARAMS_ERROR);
         }
-        return ResponseResult.success(redisUtil.sGet(params.get("id")+"favouriteTag"));
+        HashMap<Integer, String> tags = workTagService.getFavouriteTag(Integer.parseInt(params.get("id")));
+        return ResponseResult.success(tags);
     }
 
     @PostMapping("/favourite/remove")
-    public ResponseResult removeFavouriteTag(@RequestBody Map<String, String> params){
-        if (params.get("id")==null || params.get("tag")==null){
+    public ResponseResult removeFavouriteTag(@RequestBody Map<String, String> params) {
+        if (params.get("id") == null || params.get("tagId") == null) {
             return ResponseResult.failure(ResultCode.PARAMS_ERROR);
         }
-        redisUtil.setRemove(params.get("id")+"favouriteTag",params.get("tag"));
-        return ResponseResult.success("删除" + params.get("tag") + "成功");
+        ResponseResult responseResult = workTagService.removeFavouriteTag(Integer.parseInt(params.get("id")), Integer.parseInt(params.get("tagId")));
+        return responseResult;
+    }
+    @PostMapping("/favourite/removemany")
+    public ResponseResult removeManyFavouriteTag(@RequestBody RemoveUserFavouriteWorkTag workTag){
+        if (workTag.getTagIds()==null){
+            return ResponseResult.failure(ResultCode.PARAMS_ERROR);
+        }
+        ResponseResult responseResult = workTagService.removeManyFavouriteTag(workTag.getId(), workTag.getTagIds());
+        return responseResult;
     }
 }

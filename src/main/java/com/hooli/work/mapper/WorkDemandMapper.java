@@ -18,4 +18,7 @@ public interface WorkDemandMapper extends BaseMapper<WorkDemand> {
     IPage<WorkDemandDto> selectDemandDtoByPage(IPage<?> iPage);
 
     IPage<WorkDemandDto> selectDemandDtoByUserId(IPage<?> iPage,int userId);
+
+    IPage<WorkDemandDto> selectDemandDtoByWorkTag(IPage<?> iPage,int workTagId);
+
 }

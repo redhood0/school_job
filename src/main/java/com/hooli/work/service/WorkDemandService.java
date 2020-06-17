@@ -40,4 +40,7 @@ public interface WorkDemandService extends IService<WorkDemand> {
      * @return 视图对象
      */
     List<WorkDemandVo> transDtoToVo(List<WorkDemandDto> dto);
+
+    List<WorkDemandVo> selectDemandByWorkTag(int page,int size,int tagId);
+
 }

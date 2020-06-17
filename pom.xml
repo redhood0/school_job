@@ -24,6 +24,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 <!--        <dependency>-->
@@ -97,6 +103,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+            <scope>compile</scope>
         </dependency>
 
         <!--        ES全文搜索-->
@@ -188,17 +201,19 @@
                 </includes>
                 <filtering>true</filtering>
             </resource>
+
 <!--            <resource>-->
 <!--                <directory>src/main/resources</directory>-->
 <!--                <includes>-->
-<!--                    <include>**/*.*</include>-->
-<!--&lt;!&ndash;                    <include>**/*.xml</include>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <include>**/*.yml</include>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <include>**/*.jks</include>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <include>*.jks</include>&ndash;&gt;-->
+<!--                    <include>**/*.xml</include>-->
+<!--                    <include>**/*.yml</include>-->
 <!--                </includes>-->
-<!--                <filtering>false</filtering>-->
+<!--                <excludes>-->
+<!--                    <exclude>*.jks</exclude>-->
+<!--                </excludes>-->
+<!--                <filtering>true</filtering>-->
 <!--            </resource>-->
+
         </resources>
     </build>
 </project>

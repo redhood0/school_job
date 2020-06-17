@@ -1,6 +1,6 @@
 server:
   port: 8081
-#  address:  192.168.43.84
+#  address:  10.40.245.251
   ssl:
     key-store: classpath:4071328_cky666.top.pfx
 #    key-password: n5wB62w3
@@ -43,7 +43,7 @@ spring:
       max-lifetime: 60000
       connection-timeout: 1000
   redis:
-    database: 1
+    database: 0
     host: 47.101.179.127
     port: 6379
     password:
