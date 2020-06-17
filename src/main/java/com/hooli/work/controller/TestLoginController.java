@@ -20,7 +20,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/logins")
-public class HelloController {
+public class TestLoginController {
     @Resource
     UserMapper userMapper;
 

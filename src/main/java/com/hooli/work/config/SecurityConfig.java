@@ -54,6 +54,7 @@ import java.util.HashMap;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     UserMapper userMapper;
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -102,13 +103,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             resp.setContentType("application/json;charset=utf-8");
             PrintWriter out = resp.getWriter();
 
-            HashMap<String,Object> userinfo= new HashMap<>();
-            userinfo.put("msg","登录成功");
-            userinfo.put("username",authentication.getName());
-            userinfo.put("nickname",authentication.getName());
-            userinfo.put("role",authentication.getAuthorities());
+            HashMap<String, Object> userinfo = new HashMap<>();
+            userinfo.put("msg", "登录成功");
+            userinfo.put("username", authentication.getName());
+            userinfo.put("nickname", authentication.getName());
+            userinfo.put("role", authentication.getAuthorities());
 
-            ResponseResult responseResult =  ResponseResult.success(userinfo);
+            ResponseResult responseResult = ResponseResult.success(userinfo);
             out.write(new ObjectMapper().writeValueAsString(responseResult));
             out.flush();
             out.close();
@@ -147,6 +148,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().and()
                 .cors().disable()
-                .csrf().disable();
+                .csrf().disable()
+                .sessionManagement().maximumSessions(1)
+        ;
     }
 }
