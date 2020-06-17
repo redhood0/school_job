@@ -1,10 +1,7 @@
 package com.hooli.work.mapper;
 
-import com.hooli.work.entity.WorkRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
+import com.hooli.work.entity.WorkRecord;
 
 /**
  * <p>

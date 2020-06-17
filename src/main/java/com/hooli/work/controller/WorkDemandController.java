@@ -27,7 +27,6 @@ public class WorkDemandController {
     @Resource
     WorkDemandService workDemandService;
 
-
     @PostMapping("/search")
     public ResponseResult selectWorkDemandByPage(@RequestBody Map<String, Object> params) {
         if (params.get("page") == null || params.get("size") == null) {

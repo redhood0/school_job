@@ -21,5 +21,12 @@
     <sql id="Base_Column_List">
         id, demand_id, content, worktime, settlement, adv_maps_id, already_worker_num, max_worker_num, is_delete, gmt_create, gmt_modified
     </sql>
+    <select id="selectWorkDemandContentById" resultType="com.hooli.work.entity.dto.WorkDemandContentDto">
+        select wdc.id,wdc.demand_id,wdc.content,wdc.worktime,wdc.settlement,wdc.adv_maps_id,wdc.already_worker_num,wdc.max_worker_num,wdc.is_delete,wdc.gmt_create,wdc.gmt_modified
+        from work_demand_content wdc
+        left join adv_maps am
+        on wdc.adv_maps_id = am.id
+        where wdc.demand_id = #{id}
+    </select>
 
 </mapper>
