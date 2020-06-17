@@ -13,4 +13,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EvaluteService extends IService<Evalute> {
 
+    String getEvaluteNumAverage(long workId);
+
+    int addEvalute(Evalute evalute);
+
 }

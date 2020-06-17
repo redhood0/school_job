@@ -4,11 +4,9 @@ package com.hooli.work.controller;
 import com.hooli.work.entity.User;
 import com.hooli.work.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.HashMap;
 
 /**
  * <p>
@@ -25,8 +23,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/getUserMsg")
-    public User getUser(@RequestParam String username) {
-        User user = userService.getUserMsg(username);
+    public User getUser(@RequestBody HashMap<String,String> params) {
+        User user = userService.getUserMsg(params.get("username"));
         return user;
     }
 
