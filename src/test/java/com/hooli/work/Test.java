@@ -3,13 +3,17 @@ package com.hooli.work;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hooli.work.entity.dto.WorkTagDto;
+import com.hooli.work.entity.vo.WorkTagVo;
 import com.hooli.work.mapper.UserMapper;
 import com.hooli.work.mapper.WorkDemandMapper;
 import com.hooli.work.mapper.WorkTagMapper;
+import com.hooli.work.service.WorkTagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: cky
@@ -25,6 +29,8 @@ public class Test {
     UserMapper userMapper;
     @Resource
     WorkTagMapper workTagMapper;
+    @Resource
+    WorkTagService workTagService;
 
     @org.junit.jupiter.api.Test
     public void test(){
@@ -39,6 +45,15 @@ public class Test {
 //        System.out.println(tagnames);
         IPage<WorkTagDto> workTagDtoIPage = workTagMapper.selectWorkTagByPage(workDemandDtoIPage);
         System.out.println(workTagDtoIPage.getRecords());
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void setFavouriteTag() {
+        List<WorkTagVo> list = new ArrayList<>();
+        list.add(new WorkTagVo(1L,"美术"));
+        list.add(new WorkTagVo(2L,"安卓"));
+        System.out.println(workTagService.setManyFavouriteTag(2,list));
     }
 
 
