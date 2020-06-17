@@ -63,6 +63,14 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
     }
 
     @Override
+    public List<WorkDemandVo> selectDemandByWorkTag(int page, int size, int tagId) {
+        IPage<WorkDemandDto> workDemandDtoIPage = new Page<>(page, size);
+        workDemandDtoIPage = workDemandMapper.selectDemandDtoByWorkTag(workDemandDtoIPage, tagId);
+        List<WorkDemandDto> records = workDemandDtoIPage.getRecords();
+        return transDtoToVo(records);
+    }
+
+    @Override
     public List<WorkDemandVo> transDtoToVo(List<WorkDemandDto> dto) {
 
         List<WorkDemandVo> workDemandVos = new ArrayList<>();
@@ -88,6 +96,7 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
         }
         return workDemandVos;
     }
+
 
     private List<String> getTagNames(Long id) {
         List<String> tagNames = new ArrayList<>();

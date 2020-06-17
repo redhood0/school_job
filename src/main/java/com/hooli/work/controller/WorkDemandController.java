@@ -44,6 +44,18 @@ public class WorkDemandController {
                 (Integer) params.get("id")));
     }
 
+    @PostMapping("/search/tag")
+    public ResponseResult selectWorkDemandByTagId(@RequestBody Map<String, Object> params) {
+        if (params.get("page") == null || params.get("size") == null) {
+            return ResponseResult.failure(ResultCode.PARAMS_ERROR);
+        }
+        return ResponseResult.success(workDemandService.selectDemandByWorkTag(
+                (Integer) params.get("page"),
+                (Integer) params.get("size"),
+                (Integer) params.get("tagId")));
+    }
+
+
     @PostMapping("/add")
     public ResponseResult addWorkDemand(@RequestBody WorkDemand workDemand) {
         if (workDemand.getBossId() == null) {
