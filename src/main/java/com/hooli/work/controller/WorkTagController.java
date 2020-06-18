@@ -4,8 +4,8 @@ package com.hooli.work.controller;
 import com.hooli.work.common.ResponseResult;
 import com.hooli.work.common.ResultCode;
 import com.hooli.work.entity.PageInfo;
-import com.hooli.work.entity.vo.RemoveUserFavouriteWorkTag;
 import com.hooli.work.entity.vo.UserFavouriteWorkTag;
+import com.hooli.work.entity.vo.WorkTagVo;
 import com.hooli.work.service.WorkTagService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -62,7 +61,17 @@ public class WorkTagController {
             return ResponseResult.failure(ResultCode.PARAMS_ERROR);
         }
         HashMap<Integer, String> tags = workTagService.getFavouriteTag(Integer.parseInt(params.get("id")));
-        return ResponseResult.success(tags);
+        if (tags == null){
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+        List<WorkTagVo> list = new ArrayList<>();
+        for (Iterator<Map.Entry<Integer,String>> it = tags.entrySet().iterator(); it.hasNext();){
+            Map.Entry<Integer, String> entry = it.next();
+            String key = String.valueOf(entry.getKey());
+            String value = entry.getValue();
+            list.add(new WorkTagVo(Long.valueOf(key),value));
+        }
+        return ResponseResult.success(list);
     }
 
     @PostMapping("/favourite/remove")
@@ -74,11 +83,11 @@ public class WorkTagController {
         return responseResult;
     }
     @PostMapping("/favourite/removemany")
-    public ResponseResult removeManyFavouriteTag(@RequestBody RemoveUserFavouriteWorkTag workTag){
-        if (workTag.getTagIds()==null){
+    public ResponseResult removeManyFavouriteTag(@RequestBody UserFavouriteWorkTag workTag){
+        if (workTag.getWorkTagVo()==null){
             return ResponseResult.failure(ResultCode.PARAMS_ERROR);
         }
-        ResponseResult responseResult = workTagService.removeManyFavouriteTag(workTag.getId(), workTag.getTagIds());
+        ResponseResult responseResult = workTagService.removeManyFavouriteTag(workTag.getId(), workTag.getWorkTagVo());
         return responseResult;
     }
 }

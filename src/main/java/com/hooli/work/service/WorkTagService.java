@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.hooli.work.common.ResponseResult;
 import com.hooli.work.entity.WorkTag;
 import com.hooli.work.entity.dto.WorkTagDto;
-import com.hooli.work.entity.vo.TagIds;
 import com.hooli.work.entity.vo.WorkTagVo;
 
 import java.util.HashMap;
@@ -44,5 +43,5 @@ public interface WorkTagService extends IService<WorkTag> {
 
     ResponseResult setManyFavouriteTag(int userId,List<WorkTagVo> list);
 
-    ResponseResult removeManyFavouriteTag(int userId,List<TagIds> tagIds);
+    ResponseResult removeManyFavouriteTag(int userId,List<WorkTagVo> tagIds);
 }

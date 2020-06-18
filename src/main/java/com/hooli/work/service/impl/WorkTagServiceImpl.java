@@ -7,7 +7,6 @@ import com.hooli.work.common.ResponseResult;
 import com.hooli.work.common.ResultCode;
 import com.hooli.work.entity.WorkTag;
 import com.hooli.work.entity.dto.WorkTagDto;
-import com.hooli.work.entity.vo.TagIds;
 import com.hooli.work.entity.vo.WorkTagVo;
 import com.hooli.work.mapper.WorkTagMapper;
 import com.hooli.work.service.WorkTagService;
@@ -19,7 +18,7 @@ import java.util.*;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author dylan
@@ -34,7 +33,7 @@ public class WorkTagServiceImpl extends ServiceImpl<WorkTagMapper, WorkTag> impl
 
     @Override
     public List<WorkTagVo> selectDemandDtoByPage(int page, int size) {
-        IPage<WorkTagDto> workTagDtoIPage = new Page<>(page,size);
+        IPage<WorkTagDto> workTagDtoIPage = new Page<>(page, size);
         workTagDtoIPage = workTagMapper.selectWorkTagByPage(workTagDtoIPage);
         List<WorkTagDto> records = workTagDtoIPage.getRecords();
         return transDtoToVo(records);
@@ -43,11 +42,11 @@ public class WorkTagServiceImpl extends ServiceImpl<WorkTagMapper, WorkTag> impl
     @Override
     public List<WorkTagVo> transDtoToVo(List<WorkTagDto> dto) {
         List<WorkTagVo> workTagVos = new ArrayList<>();
-        for(WorkTagDto workTagDto : dto){
+        for (WorkTagDto workTagDto : dto) {
             workTagVos.add(WorkTagVo.builder()
-            .tagId(workTagDto.getId())
-            .tagName(workTagDto.getTagname())
-            .build());
+                    .tagId(workTagDto.getId())
+                    .tagName(workTagDto.getTagname())
+                    .build());
         }
         return workTagVos;
     }
@@ -55,62 +54,56 @@ public class WorkTagServiceImpl extends ServiceImpl<WorkTagMapper, WorkTag> impl
     @Override
     public ResponseResult setFavouriteTag(int userId, int tagId, String tagName) {
         HashMap<Integer, String> historyTag;
-        if (getFavouriteTag(userId) !=null) {
+        if (getFavouriteTag(userId) != null) {
             historyTag = getFavouriteTag(userId);
             for (Map.Entry<Integer, String> item : historyTag.entrySet()) {
                 if ((tagId + "").equals(item.getKey() + "")) {
                     return ResponseResult.failure(ResultCode.DATA_ALREADY_EXISTED);
                 }
             }
-        }else {
+        } else {
             historyTag = new HashMap<>();
         }
-        historyTag.put(tagId,tagName);
+        historyTag.put(tagId, tagName);
         redisUtil.hset("favourite_tag", userId + "", historyTag);
         return ResponseResult.success("添加" + tagName + "成功");
     }
 
     @Override
-    public ResponseResult setManyFavouriteTag(int userId,List<WorkTagVo> list){
+    public ResponseResult setManyFavouriteTag(int userId, List<WorkTagVo> list) {
         System.out.println(list);
         HashMap<Integer, String> historyTag;
-        if (getFavouriteTag(userId) !=null) {
+        if (getFavouriteTag(userId) != null) {
             historyTag = getFavouriteTag(userId);
-            for (Map.Entry<Integer, String> item : historyTag.entrySet()) {
-                for (WorkTagVo workTagVo : list){
-                    if ((workTagVo.getTagId() + "").equals(item.getKey() + "")) {
-                        return ResponseResult.failure(ResultCode.DATA_ALREADY_EXISTED);
-                    }
-                }
-            }
-        }else {
+
+        } else {
             historyTag = new HashMap<>();
         }
-        for (WorkTagVo workTagVo : list){
-            System.out.println(workTagVo.getTagId());
-            historyTag.put(Integer.parseInt(workTagVo.getTagId()+""),workTagVo.getTagName());
+
+        for (WorkTagVo workTagVo : list) {
+            historyTag.put(Integer.parseInt(workTagVo.getTagId() + ""), workTagVo.getTagName());
         }
-        redisUtil.hset("favourite_tag", userId + "", historyTag);
+        redisUtil.hset("favourite_tag", userId + "", deleteDuplicate(historyTag));
         return ResponseResult.success("添加" + list + "成功");
 
     }
 
     @Override
     public HashMap<Integer, String> getFavouriteTag(int userId) {
-        HashMap<Integer,String> favouriteTag = (HashMap) redisUtil.hget("favourite_tag", userId + "");
+        HashMap<Integer, String> favouriteTag = (HashMap) redisUtil.hget("favourite_tag", userId + "");
         return favouriteTag;
     }
 
     @Override
     public ResponseResult removeFavouriteTag(int userId, int tagId) {
         HashMap<Integer, String> historyTag = getFavouriteTag(userId);
-        for (Iterator<Map.Entry<Integer,String>> it = historyTag.entrySet().iterator();it.hasNext();){
+        for (Iterator<Map.Entry<Integer, String>> it = historyTag.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry<Integer, String> next = it.next();
-            if ((tagId+"").equals(next.getKey()+"")){
+            if ((tagId + "").equals(next.getKey() + "")) {
                 it.remove();
                 redisUtil.hset("favourite_tag", userId + "", historyTag);
                 return ResponseResult.success("删除成功");
-            }else {
+            } else {
                 return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
             }
         }
@@ -118,21 +111,39 @@ public class WorkTagServiceImpl extends ServiceImpl<WorkTagMapper, WorkTag> impl
     }
 
     @Override
-    public ResponseResult removeManyFavouriteTag(int userId,List<TagIds> tagIds){
+    public ResponseResult removeManyFavouriteTag(int userId, List<WorkTagVo> tagVos) {
         HashMap<Integer, String> historyTag = getFavouriteTag(userId);
-        for (Iterator<Map.Entry<Integer,String>> it = historyTag.entrySet().iterator();it.hasNext();){
+        List<Long> tagIds = new ArrayList<>();
+        for (WorkTagVo workTagVo : tagVos) {
+            tagIds.add(workTagVo.getTagId());
+        }
+        for (Iterator<Map.Entry<Integer, String>> it = historyTag.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry<Integer, String> next = it.next();
-            for (TagIds tagId : tagIds){
-                if ((tagId.getTagId()+"").equals(next.getKey()+"")){
+            for (Long tagId : tagIds) {
+                System.out.println(tagId + "------" + next.getKey());
+                if ((tagId + "").equals(next.getKey() + "")) {
                     it.remove();
                     redisUtil.hset("favourite_tag", userId + "", historyTag);
-                    return ResponseResult.success("批量删除成功");
-                }else {
-                    return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
                 }
             }
         }
-        return ResponseResult.failure(ResultCode.SYSTEM_INNER_ERROR);
+        return ResponseResult.success("批量删除成功");
+    }
+
+    private static Map<Integer, String> deleteDuplicate(Map<Integer, String> map) {
+        if (map == null || map.size() == 0) {
+            return new HashMap<Integer, String>();
+        }
+        Map<Integer, String> map2 = new HashMap<Integer, String>();
+        for (Iterator<Map.Entry<Integer, String>> iterator = map.entrySet().iterator(); iterator.hasNext();) {
+            Map.Entry<Integer, String> entry = iterator.next();
+            if (map2.containsValue(entry.getValue())) {
+                continue;
+            } else {
+                map2.put(Integer.parseInt(entry.getKey()+""), entry.getValue());
+            }
+        }
+        return map2;
     }
 
 }
