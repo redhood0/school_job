@@ -21,7 +21,8 @@ public class WorkRecordServiceTest {
 
     @Test
     public void setWorkRecordService(){
-        workRecordService.getWorkRecordSketch(2L);
+        System.out.println( workRecordService.getWorkRecordPage(2,1,2));
+//        workRecordService.getWorkRecordSketch(2L);
     }
 
 }

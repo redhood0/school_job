@@ -75,12 +75,12 @@ public class GlobalExceptionHandler {
      * @param exception
      * @return ResponseResult
      */
-//    @ExceptionHandler(value = {NullPointerException.class})
-//    @ResponseBody
-//    public ResponseResult sendError(NullPointerException exception) {
-//        log.error(exception.getMessage());
-//        return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
-//    }
+    @ExceptionHandler(value = {NullPointerException.class})
+    @ResponseBody
+    public ResponseResult sendError(NullPointerException exception) {
+        log.error(exception.getMessage());
+        return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE,"参数异常");
+    }
 
     /**
      * IO异常的处理

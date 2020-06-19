@@ -1,7 +1,10 @@
 package com.hooli.work.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hooli.work.entity.WorkRecord;
+import com.hooli.work.entity.vo.WorkRecordVo;
 
 /**
  * <p>
@@ -14,5 +17,7 @@ import com.hooli.work.entity.WorkRecord;
 public interface WorkRecordMapper extends BaseMapper<WorkRecord> {
 
 //    List<WorkRecord> getWorkRecordSketch(String username);
+
+    IPage<WorkRecordVo> getWorkRecordPageByUserId(Page<?> page,long userId);
 
 }
