@@ -10,6 +10,7 @@ package com.hooli.work.service;
  * @Description:
  */
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,9 +19,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class EvaluteServiceTest {
     @Autowired
     EvaluteService evaluteService;
-    @Test
-    public void getEvaluteNumAverageTest(){
-        System.out.println(evaluteService.getEvaluteNumAverage(4l));
 
+    @Test
+    public void getEvaluteNumAverageTest() {
+        System.out.println(evaluteService.getEvaluteNumAverage(4l));
+    }
+
+    @Test
+    public void getEvaluteByPageTest() {
+        Page page = evaluteService.getEvaluteByPage(3, 1,2,"worker");
+        System.out.println(page.getRecords());
     }
 }
