@@ -202,17 +202,17 @@
                 <filtering>true</filtering>
             </resource>
 
-<!--            <resource>-->
-<!--                <directory>src/main/resources</directory>-->
-<!--                <includes>-->
-<!--                    <include>**/*.xml</include>-->
-<!--                    <include>**/*.yml</include>-->
-<!--                </includes>-->
-<!--                <excludes>-->
-<!--                    <exclude>*.jks</exclude>-->
-<!--                </excludes>-->
-<!--                <filtering>true</filtering>-->
-<!--            </resource>-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                </includes>
+                <excludes>
+                    <exclude>*.jks</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
 
         </resources>
     </build>
