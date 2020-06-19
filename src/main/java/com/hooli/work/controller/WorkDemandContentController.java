@@ -36,15 +36,15 @@ public class WorkDemandContentController {
         return ResponseResult.success(workDemandContentService.selectWorkDemandContentVoById(params.get("id")));
     }
 
-    @PostMapping("/add")
-    public ResponseResult addWorkDemandContent(@RequestBody WorkDemandContentAdvMaps workDemandContentAdvMaps) {
-
-        int insert = workDemandContentService.insert(workDemandContentAdvMaps.getWorkDemandContent(),workDemandContentAdvMaps.getAdvMaps());
-        if (insert < 1) {
-            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
-        }
-        return ResponseResult.success(workDemandContentAdvMaps);
-    }
+//    @PostMapping("/add")
+//    public ResponseResult addWorkDemandContent(@RequestBody WorkDemandContentAdvMaps workDemandContentAdvMaps) {
+//
+//        int insert = workDemandContentService.insert(workDemandContentAdvMaps.getWorkDemandContent(),workDemandContentAdvMaps.getAdvMaps());
+//        if (insert < 1) {
+//            return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+//        }
+//        return ResponseResult.success(workDemandContentAdvMaps);
+//    }
 
     @PostMapping("/update")
     public ResponseResult updateWorkDemandContent(@RequestBody WorkDemandContentAdvMaps workDemandContentAdvMaps) {

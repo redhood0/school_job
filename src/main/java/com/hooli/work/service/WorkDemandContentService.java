@@ -19,7 +19,7 @@ public interface WorkDemandContentService extends IService<WorkDemandContent> {
 
     WorkDemandContentVo transDtoToVo(WorkDemandContentDto dto);
 
-    int insert(WorkDemandContent workDemandContent, AdvMaps advMaps);
+//    int insert(WorkDemandContent workDemandContent, AdvMaps advMaps);
 
     int update(WorkDemandContent workDemandContent, AdvMaps advMaps);
 }

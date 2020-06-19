@@ -2,6 +2,7 @@ package com.hooli.work.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("tag_demand")
+@Builder
 public class TagDemand extends Model<TagDemand> {
 
     private static final long serialVersionUID = 1L;

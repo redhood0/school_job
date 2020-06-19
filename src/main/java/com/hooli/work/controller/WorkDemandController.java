@@ -4,6 +4,7 @@ package com.hooli.work.controller;
 import com.hooli.work.common.ResponseResult;
 import com.hooli.work.common.ResultCode;
 import com.hooli.work.entity.WorkDemand;
+import com.hooli.work.entity.vo.WorkDemandContentAdvMaps;
 import com.hooli.work.service.WorkDemandService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,15 +57,15 @@ public class WorkDemandController {
 
 
     @PostMapping("/add")
-    public ResponseResult addWorkDemand(@RequestBody WorkDemand workDemand) {
-        if (workDemand.getBossId() == null) {
-            return ResponseResult.failure(ResultCode.PARAMS_ERROR);
-        }
-        int insert = workDemandService.insert(workDemand);
+    public ResponseResult addWorkDemand(@RequestBody WorkDemandContentAdvMaps workDemandContentAdvMaps) {
+        int insert = workDemandService.insert(workDemandContentAdvMaps.getWorkDemand()
+                , workDemandContentAdvMaps.getWorkDemandContent()
+                , workDemandContentAdvMaps.getAdvMaps()
+                , workDemandContentAdvMaps.getTagIds());
         if (insert < 1) {
             return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
         }
-        return ResponseResult.success(workDemand);
+        return ResponseResult.success(workDemandContentAdvMaps);
     }
 
     @PostMapping("/delete")

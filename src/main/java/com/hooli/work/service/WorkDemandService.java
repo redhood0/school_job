@@ -1,9 +1,12 @@
 package com.hooli.work.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hooli.work.entity.AdvMaps;
 import com.hooli.work.entity.WorkDemand;
+import com.hooli.work.entity.WorkDemandContent;
 import com.hooli.work.entity.dto.WorkDemandDto;
 import com.hooli.work.entity.vo.WorkDemandVo;
+import com.hooli.work.entity.vo.WorkTagVo;
 
 import java.util.List;
 
@@ -21,7 +24,7 @@ public interface WorkDemandService extends IService<WorkDemand> {
      */
     List<WorkDemandVo> selectDemandDtoByPage(int page, int size);
 
-    int insert(WorkDemand workDemand);
+    int insert(WorkDemand workDemand, WorkDemandContent workDemandContent, AdvMaps advMaps,List<WorkTagVo> tagIds);
 
     int update(WorkDemand workDemand);
 

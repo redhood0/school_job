@@ -3,14 +3,17 @@ package com.hooli.work.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hooli.work.entity.AdvMaps;
+import com.hooli.work.entity.TagDemand;
 import com.hooli.work.entity.WorkDemand;
+import com.hooli.work.entity.WorkDemandContent;
 import com.hooli.work.entity.dto.UserDto;
 import com.hooli.work.entity.dto.WorkDemandDto;
 import com.hooli.work.entity.dto.WorkTagDto;
+import com.hooli.work.entity.vo.TagDemandVo;
 import com.hooli.work.entity.vo.WorkDemandVo;
-import com.hooli.work.mapper.UserMapper;
-import com.hooli.work.mapper.WorkDemandMapper;
-import com.hooli.work.mapper.WorkTagMapper;
+import com.hooli.work.entity.vo.WorkTagVo;
+import com.hooli.work.mapper.*;
 import com.hooli.work.service.WorkDemandService;
 import lombok.extern.slf4j.Slf4j;
 import org.ocpsoft.prettytime.PrettyTime;
@@ -35,6 +38,12 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
     private UserMapper userMapper;
     @Resource
     private WorkTagMapper workTagMapper;
+    @Resource
+    WorkDemandContentMapper workDemandContentMapper;
+    @Resource
+    AdvMapsMapper advMapsMapper;
+    @Resource
+    TagDemandMapper tagDemandMapper;
 
     @Override
     public List<WorkDemandVo> selectDemandDtoByPage(int page, int size) {
@@ -45,8 +54,15 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
     }
 
     @Override
-    public int insert(WorkDemand workDemand) {
-        return workDemandMapper.insert(workDemand);
+    public int insert(WorkDemand workDemand, WorkDemandContent workDemandContent, AdvMaps advMaps,List<WorkTagVo> tagIds) {
+        advMapsMapper.insert(advMaps);
+        workDemandContent.setAdvMapsId(advMaps.getId());
+        workDemandMapper.insert(workDemand);
+        workDemandContent.setDemandId(workDemand.getId());
+        for (WorkTagVo tagId:tagIds){
+            tagDemandMapper.insert(TagDemand.builder().demandId(workDemand.getId()).tagId(tagId.getTagId()).build());
+        }
+        return workDemandContentMapper.insert(workDemandContent);
     }
 
     @Override

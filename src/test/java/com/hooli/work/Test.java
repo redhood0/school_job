@@ -2,7 +2,6 @@ package com.hooli.work;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hooli.work.entity.AdvMaps;
 import com.hooli.work.entity.dto.WorkTagDto;
 import com.hooli.work.mapper.UserMapper;
 import com.hooli.work.mapper.WorkDemandMapper;
@@ -62,10 +61,10 @@ public class Test {
 //        System.out.println(workDemandContentService.selectWorkDemandContentVoById(1L));
 //    }
 
-    @org.junit.jupiter.api.Test
-    void setWorkDemandContent() {
-        AdvMaps advMaps = new AdvMaps();
-        advMaps.setAdvMap1("111");
-        System.out.println(workDemandContentService.insert(null,advMaps));
-    }
+//    @org.junit.jupiter.api.Test
+//    void setWorkDemandContent() {
+//        AdvMaps advMaps = new AdvMaps();
+//        advMaps.setAdvMap1("111");
+//        System.out.println(workDemandContentService.insert(null,advMaps));
+//    }
 }

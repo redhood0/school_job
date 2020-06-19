@@ -56,12 +56,12 @@ public class WorkDemandContentServiceImpl extends ServiceImpl<WorkDemandContentM
         return vo;
     }
 
-    @Override
-    public int insert(WorkDemandContent workDemandContent,AdvMaps advMaps) {
-        advMapsMapper.insert(advMaps);
-        workDemandContent.setAdvMapsId(advMaps.getId());
-        return workDemandContentMapper.insert(workDemandContent);
-    }
+//    @Override
+//    public int insert(WorkDemandContent workDemandContent,AdvMaps advMaps) {
+//        advMapsMapper.insert(advMaps);
+//        workDemandContent.setAdvMapsId(advMaps.getId());
+//        return workDemandContentMapper.insert(workDemandContent);
+//    }
 
 
     @Override
