@@ -1,6 +1,7 @@
 package com.hooli.work.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.hooli.work.entity.User;
 import com.hooli.work.execption.ServiceException;
 import com.hooli.work.mapper.UserMapper;
@@ -27,9 +28,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public int updateUser(User user) {
-
-
-        return 0;
+        //todo：限制更新的字段
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.eq("id", user.getId());
+        int num = userMapper.update(user, userUpdateWrapper);
+        if(num == 0){
+            throw new ServiceException("更新个人信息失败");
+        }
+        return num;
     }
 
     @Override
@@ -37,7 +43,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         User user = userMapper.selectOne(queryWrapper);
-        if(user == null || user.getIsDelete() == 1){
+        if (user == null || user.getIsDelete() == 1) {
             throw new ServiceException("用户名不存在");
         }
         return user;

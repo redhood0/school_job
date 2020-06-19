@@ -95,8 +95,6 @@ public class User extends Model<User> {
     @TableField(value = "gmt_modified",fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime gmtModified;
 
-
-
     @Override
     protected Serializable pkVal() {
         return this.id;
