@@ -59,7 +59,6 @@ public class WorkDemandController {
                 (Integer) params.get("tagId")));
     }
 
-
     @PostMapping("/add")
     public ResponseResult addWorkDemand(@RequestBody WorkDemandContentAdvMaps workDemandContentAdvMaps) {
 

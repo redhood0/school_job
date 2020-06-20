@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.hooli.work.entity.vo.WorkRecordSketchVo;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -21,4 +22,5 @@ public interface WorkRecordService extends IService<WorkRecord> {
 
     HashMap<String,Object> getWorkRecordPage(long userId, int currentPage, int size);
 
+    HashMap getWorkRecordPageByWD(long demandId, int currentPage, int size);
 }

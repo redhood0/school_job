@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -30,5 +31,17 @@ public class WorkRecordController {
         return result;
     }
 
+    /**
+     * 获取某个工作的所有申请的员工
+     * @param param
+     * @return
+     */
+    @PostMapping("/getWorkRecordPages/ByWorkDemand")
+    public HashMap getWorkRecordPagesByWorkDemand(@RequestBody HashMap<String, Object> param) {
 
+        HashMap result = workRecordService.getWorkRecordPageByWD(Long.parseLong(param.get("demandId").toString())
+                , Integer.parseInt(param.get("currentPage").toString())
+                , Integer.parseInt(param.get("pageSize").toString()));
+        return result;
+    }
 }

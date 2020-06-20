@@ -2,6 +2,7 @@ package com.hooli.work.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -41,12 +42,14 @@ public class WorkRecord extends Model<WorkRecord> {
      * 开始工作时间
      */
     @TableField("gmt_work_start")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtWorkStart;
 
     /**
      * 结束工作时间
      */
     @TableField("gmt_work_end")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtWorkEnd;
 
     /**
@@ -59,9 +62,11 @@ public class WorkRecord extends Model<WorkRecord> {
     private Integer isDelete;
 
     @TableField(value = "gmt_create",fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtCreate;
 
     @TableField(value = "gmt_modified",fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtModified;
 
 
