@@ -1,11 +1,14 @@
 package com.hooli.work.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.hooli.work.common.ResponseResult;
 import com.hooli.work.common.ResultCode;
 import com.hooli.work.entity.WorkDemand;
 import com.hooli.work.entity.vo.WorkDemandContentAdvMaps;
 import com.hooli.work.service.WorkDemandService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import java.util.Map;
  * @since 2020-06-09
  */
 @RestController
+@Slf4j
 @RequestMapping("/api/workdemand")
 public class WorkDemandController {
     @Resource
@@ -58,6 +62,7 @@ public class WorkDemandController {
 
     @PostMapping("/add")
     public ResponseResult addWorkDemand(@RequestBody WorkDemandContentAdvMaps workDemandContentAdvMaps) {
+        
         int insert = workDemandService.insert(workDemandContentAdvMaps.getWorkDemand()
                 , workDemandContentAdvMaps.getWorkDemandContent()
                 , workDemandContentAdvMaps.getAdvMaps()
@@ -65,7 +70,7 @@ public class WorkDemandController {
         if (insert < 1) {
             return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
         }
-        return ResponseResult.success(workDemandContentAdvMaps);
+        return ResponseResult.success("添加成功");
     }
 
     @PostMapping("/delete")
