@@ -62,7 +62,7 @@ public class WorkDemandController {
 
     @PostMapping("/add")
     public ResponseResult addWorkDemand(@RequestBody WorkDemandContentAdvMaps workDemandContentAdvMaps) {
-        
+
         int insert = workDemandService.insert(workDemandContentAdvMaps.getWorkDemand()
                 , workDemandContentAdvMaps.getWorkDemandContent()
                 , workDemandContentAdvMaps.getAdvMaps()
