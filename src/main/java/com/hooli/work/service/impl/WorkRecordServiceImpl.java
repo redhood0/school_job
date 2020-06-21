@@ -71,32 +71,34 @@ public class WorkRecordServiceImpl extends ServiceImpl<WorkRecordMapper, WorkRec
     }
 
     @Override
-    public HashMap getWorkRecordPageByWD(long demandId, int currentPage, int size) {
+    public HashMap getWorkRecordPageByWD(long demandId, int currentPage, int size, int worktype) {
         QueryWrapper<WorkRecord> queryWrapper = new QueryWrapper();
         queryWrapper.eq("work_demand_id", demandId);
-        queryWrapper.eq("work_status", 0);
 
-        Page<WorkRecord> page = new Page<>(currentPage,size);
+        if(worktype != 10){
+            queryWrapper.eq("work_status", worktype);
+        }
 
-        page = workRecordMapper.selectPage(page,queryWrapper);
+        Page<WorkRecord> page = new Page<>(currentPage, size);
+        page = workRecordMapper.selectPage(page, queryWrapper);
 
         List<WorkRecord> workRecords = page.getRecords();
         List<HashMap> result = new ArrayList<>();
-        for(WorkRecord workRecord : workRecords){
+        for (WorkRecord workRecord : workRecords) {
             long wokerId = workRecord.getWorkerId();
 
             QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
             userQueryWrapper.eq("id", wokerId);
             User user = userMapper.selectOne(userQueryWrapper);
 
-            HashMap<String,Object> data = new HashMap();
-            data.put("user",user);
-            data.put("workRecord",workRecord);
+            HashMap<String, Object> data = new HashMap();
+            data.put("user", user);
+            data.put("workRecord", workRecord);
             result.add(data);
         }
-        HashMap<String,Object> rest = new HashMap<>();
-        rest.put("result",result);
-        rest.put("pageNum",page.getPages());
+        HashMap<String, Object> rest = new HashMap<>();
+        rest.put("result", result);
+        rest.put("pageNum", page.getPages());
         return rest;
     }
 }

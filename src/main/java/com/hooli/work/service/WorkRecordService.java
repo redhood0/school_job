@@ -22,5 +22,5 @@ public interface WorkRecordService extends IService<WorkRecord> {
 
     HashMap<String,Object> getWorkRecordPage(long userId, int currentPage, int size);
 
-    HashMap getWorkRecordPageByWD(long demandId, int currentPage, int size);
+    HashMap getWorkRecordPageByWD(long demandId, int currentPage, int size, int worktype);
 }

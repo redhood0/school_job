@@ -26,7 +26,7 @@ public class WorkRecordServiceTest {
     }
     @Test
     public void getWorkRecordPageByWD(){
-        workRecordService.getWorkRecordPageByWD(1,1,2);
+        workRecordService.getWorkRecordPageByWD(1,1,2,10);
     }
 
 }

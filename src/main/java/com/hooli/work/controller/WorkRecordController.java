@@ -33,6 +33,7 @@ public class WorkRecordController {
 
     /**
      * 获取某个工作的所有申请的员工
+     * worktype:0-申请中，1-工作中，2-工作完成，3-工作拒绝, 10-全部类型
      * @param param
      * @return
      */
@@ -41,7 +42,8 @@ public class WorkRecordController {
 
         HashMap result = workRecordService.getWorkRecordPageByWD(Long.parseLong(param.get("demandId").toString())
                 , Integer.parseInt(param.get("currentPage").toString())
-                , Integer.parseInt(param.get("pageSize").toString()));
+                , Integer.parseInt(param.get("pageSize").toString())
+                , Integer.parseInt(param.get("worktype").toString()));
         return result;
     }
 }
