@@ -38,6 +38,4 @@ public class GlobalResponseHandler implements ResponseBodyAdvice {
             return ResponseResult.success(body);
         }
     }
-
-
 }
