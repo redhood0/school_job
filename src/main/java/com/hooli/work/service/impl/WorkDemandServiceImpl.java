@@ -10,7 +10,6 @@ import com.hooli.work.entity.WorkDemandContent;
 import com.hooli.work.entity.dto.UserDto;
 import com.hooli.work.entity.dto.WorkDemandDto;
 import com.hooli.work.entity.dto.WorkTagDto;
-import com.hooli.work.entity.vo.TagDemandVo;
 import com.hooli.work.entity.vo.WorkDemandVo;
 import com.hooli.work.entity.vo.WorkTagVo;
 import com.hooli.work.mapper.*;
@@ -24,6 +23,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author cky
@@ -88,7 +88,8 @@ public class WorkDemandServiceImpl extends ServiceImpl<WorkDemandMapper, WorkDem
 
     @Override
     public List<WorkDemandVo> transDtoToVo(List<WorkDemandDto> dto) {
-
+        Locale locale = Locale.CHINESE;
+        Locale.setDefault(locale);
         List<WorkDemandVo> workDemandVos = new ArrayList<>();
         for (WorkDemandDto workDemand : dto) {
             UserDto userDto = userMapper.selectUserByUserId(workDemand.getBossId());
