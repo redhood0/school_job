@@ -2,11 +2,13 @@ package com.hooli.work.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hooli.work.entity.User;
 import com.hooli.work.entity.WorkRecord;
 import com.hooli.work.entity.vo.WorkRecordSketchVo;
 import com.hooli.work.entity.vo.WorkRecordVo;
+import com.hooli.work.execption.ServiceException;
 import com.hooli.work.mapper.UserMapper;
 import com.hooli.work.mapper.WorkRecordMapper;
 import com.hooli.work.service.WorkRecordService;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +28,7 @@ import java.util.function.Consumer;
  * 服务实现类
  * </p>
  *
- * @author dylan
+ * @author zq
  * @since 2020-06-11
  */
 @Service
@@ -100,5 +103,34 @@ public class WorkRecordServiceImpl extends ServiceImpl<WorkRecordMapper, WorkRec
         rest.put("result", result);
         rest.put("pageNum", page.getPages());
         return rest;
+    }
+
+    /**
+     * 增加工作记录
+     * @return
+     */
+    @Override
+    public Integer addWorkRecord(WorkRecord workRecord) {
+        workRecord.setGmtWorkStart(LocalDateTime.now());
+        workRecord.setWorkStatus(0);
+        int num = workRecordMapper.insert(workRecord);
+        if(num != 1){
+            throw new ServiceException("申请工作失败");
+        }
+        return num;
+    }
+
+    @Override
+    public Integer updateRecordStatus(Integer workStatus,Long workRecordId) {
+        WorkRecord workRecord = new WorkRecord();
+        workRecord.setWorkStatus(workStatus);
+
+        UpdateWrapper<WorkRecord> workRecordUpdateWrapper = new UpdateWrapper<>();
+        workRecordUpdateWrapper.eq("id",workRecordId);
+        int num = workRecordMapper.update(workRecord,workRecordUpdateWrapper);
+        if( num != 1){
+            throw new ServiceException("工作状态更新失败");
+        }
+        return num;
     }
 }

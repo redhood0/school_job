@@ -72,8 +72,9 @@ public class QQAuthenticationFilter extends AbstractAuthenticationProcessingFilt
         if(user == null){
             User newUser = new User();
             newUser.setUsername(openid);
-            newUser.setNickname(openid);
+            newUser.setNickname("勤奋的小明#" + openid.substring(3,6));
             newUser.setPassword("123456");
+            newUser.setSaySomething("说些什么~");
             userMapper.insert(newUser);
         }
         authRequest = new UsernamePasswordAuthenticationToken(openid

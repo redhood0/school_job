@@ -1,6 +1,8 @@
 package com.hooli.work.controller;
 
 
+import com.hooli.work.common.ResponseResult;
+import com.hooli.work.entity.WorkRecord;
 import com.hooli.work.service.WorkRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,7 @@ import java.util.List;
  * 前端控制器
  * </p>
  *
- * @author dylan
+ * @author zq
  * @since 2020-06-11
  */
 @RestController
@@ -45,5 +47,29 @@ public class WorkRecordController {
                 , Integer.parseInt(param.get("pageSize").toString())
                 , Integer.parseInt(param.get("worktype").toString()));
         return result;
+    }
+
+    /**
+     * 工作申请
+     * @param workRecord
+     * @return
+     */
+    @PostMapping("/addWorkRecord")
+    public ResponseResult addWorkRecord(@RequestBody WorkRecord workRecord){
+        workRecordService.addWorkRecord(workRecord);
+        return ResponseResult.success("增加数据成功");
+    }
+
+    /**
+     * 工作状态修改,0-申请中，1-工作中，2-已完成，3-已拒绝
+     * @param param
+     * @return
+     */
+    @PostMapping("/updateRecordStatus")
+    public ResponseResult updateRecordStatus(@RequestBody HashMap<String,String> param){
+        Integer workStatus = Integer.parseInt(param.get("workStatus"));
+        Long workRecordId = Long.parseLong(param.get("workRecordId"));
+        workRecordService.updateRecordStatus(workStatus,workRecordId);
+        return ResponseResult.success("更新工作状态");
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
  *  服务类
  * </p>
  *
- * @author dylan
+ * @author zq
  * @since 2020-06-11
  */
 public interface WorkRecordService extends IService<WorkRecord> {
@@ -23,4 +23,8 @@ public interface WorkRecordService extends IService<WorkRecord> {
     HashMap<String,Object> getWorkRecordPage(long userId, int currentPage, int size);
 
     HashMap getWorkRecordPageByWD(long demandId, int currentPage, int size, int worktype);
+
+    Integer addWorkRecord(WorkRecord workRecord);
+
+    Integer updateRecordStatus(Integer workStatus,Long workRecordId);
 }
