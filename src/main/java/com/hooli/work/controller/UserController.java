@@ -29,6 +29,12 @@ public class UserController {
         return user;
     }
 
+    @PostMapping("/getUserMsgById")
+    public User getUserMsgById(@RequestBody HashMap<String,String> params) {
+        User user = userService.getUserMsg(Long.parseLong(params.get("userId")));
+        return user;
+    }
+
     @PostMapping("/updateUserMsg")
     public ResponseResult updateUserMsg(@RequestBody User params) {
         userService.updateUser(params);

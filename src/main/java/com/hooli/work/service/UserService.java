@@ -17,4 +17,5 @@ public interface UserService extends IService<User> {
 
     User getUserMsg(String username);
 
+    User getUserMsg(Long userId);
 }

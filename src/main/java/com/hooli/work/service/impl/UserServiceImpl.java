@@ -49,5 +49,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
 
+    @Override
+    public User getUserMsg(Long userId) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", userId);
+        User user = userMapper.selectOne(queryWrapper);
+        if (user == null || user.getIsDelete() == 1) {
+            throw new ServiceException("用户id不存在");
+        }
+        return user;
+    }
+
 
 }
